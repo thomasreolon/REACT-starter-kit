@@ -1,10 +1,16 @@
 import React from "react";
-import "./App.css";
+
 import contexts from "../../scripts/Contexts";
+import { compose } from "recompose";
+
 import Navbar from "../Navbar";
 
+// App Component
 function App() {
   return <Navbar />;
 }
 
-export default contexts.user.withContext(App);
+export default compose(
+  // list the context you want to use here
+  contexts.user.withContext
+)(App);

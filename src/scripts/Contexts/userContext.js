@@ -1,8 +1,6 @@
-import React, { createContext, useReducer, useContext, useEffect } from "react";
+import React, { createContext, useReducer, useContext } from "react";
 
-const initialState = {
-  user: null,
-};
+const initialState = null;
 
 /////////////////////////// REDUCER ////////////////////////////////////
 
@@ -19,20 +17,17 @@ function reducer(state, action) {
   }
 }
 
-//////////////////////////////// CONTEXTS ///////////////////////////////////////
+//////////////////////////////// CONTEXT ///////////////////////////////////////
 
 // User - context data
 const Context = createContext();
 
 const withContext = (Component) => {
-  const ContextComponent = (props) => {
-    // CONTEXT PROVIDER WRAPPER
-    return (
-      <Context.Provider value={useReducer(reducer, initialState)}>
-        <Component {...props} />
-      </Context.Provider>
-    );
-  };
+  const ContextComponent = (props) => (
+    <Context.Provider value={useReducer(reducer, initialState)}>
+      <Component {...props} />
+    </Context.Provider>
+  );
 
   return ContextComponent;
 };
