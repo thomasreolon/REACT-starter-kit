@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useContext } from "react";
 
-const userInitialState = {
-  user: null,
+const initialState = {
+  name: "thom",
 };
 
 /////////////////////////// REDUCER ////////////////////////////////////
@@ -21,21 +21,21 @@ function reducer(state, action) {
 //////////////////////////////// CONTEXTS ///////////////////////////////////////
 
 // User - context data
-const UserContext = createContext();
+const Context = createContext();
 
-const withUserContext = ({ children }) => (
-  <UserContext.Provider value={useReducer(reducer, userInitialState)}>
-    {children}
-  </UserContext.Provider>
-);
+const withContext = (Component) => {
+  const ContextComponent = (props) => (
+    <Context.Provider value={useReducer(reducer, initialState)}>
+      <Component {...props} />
+    </Context.Provider>
+  );
 
-const useUserState = () => useContext(UserContext);
+  return ContextComponent;
+};
 
 //////////////////////////////// EXPORT ////////////////////////////////////////
 
 export default {
-  user: {
-    getContext: withUserContext,
-    useState: useUserState,
-  },
+  withContext: withContext,
+  useContext: () => useContext(Context),
 };
