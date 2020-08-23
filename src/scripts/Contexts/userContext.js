@@ -1,16 +1,17 @@
-import React, { createContext, useReducer, useContext } from "react";
+import React, { createContext, useReducer, useContext, useEffect } from "react";
 
 const initialState = {
-  name: "thom",
+  user: null,
 };
 
 /////////////////////////// REDUCER ////////////////////////////////////
 
 function reducer(state, action) {
   switch (action.type) {
-    case "ADD_TO_BASKET":
+    case "SET_USER":
       return {
         ...state,
+        user: action.user,
       };
 
     default:
@@ -24,11 +25,14 @@ function reducer(state, action) {
 const Context = createContext();
 
 const withContext = (Component) => {
-  const ContextComponent = (props) => (
-    <Context.Provider value={useReducer(reducer, initialState)}>
-      <Component {...props} />
-    </Context.Provider>
-  );
+  const ContextComponent = (props) => {
+    // CONTEXT PROVIDER WRAPPER
+    return (
+      <Context.Provider value={useReducer(reducer, initialState)}>
+        <Component {...props} />
+      </Context.Provider>
+    );
+  };
 
   return ContextComponent;
 };

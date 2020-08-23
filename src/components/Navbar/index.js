@@ -6,7 +6,7 @@ const Navbar = (props) => {
 
   return (
     <div style={{ backgroundColor: "lightcyan", textAlign: "center" }}>
-      Hello, {user.name}
+      Hello, {user.user ? "You are signed in" : "sign in!"}
     </div>
   );
 };

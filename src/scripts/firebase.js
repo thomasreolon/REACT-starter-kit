@@ -1,4 +1,6 @@
 import firebase from "firebase";
+import React from "react";
+import contexts from "./Contexts";
 
 const firebaseApp = firebase.initializeApp({
   apiKey: process.env.REACT_APP_API_KEY,
@@ -13,4 +15,17 @@ const firebaseApp = firebase.initializeApp({
 const db = firebaseApp.firestore();
 const auth = firebase.auth();
 
-export { db, auth };
+const FirebaseUpdater = () => {
+  // UPDATE CONTEXT
+  const [{}, dispatch] = contexts.user.useContext();
+  React.useEffect(() => {
+    const unsub = auth.onAuthStateChanged((authUser) => {
+      dispatch({ type: "SET_USER", user: authUser || null });
+    });
+    return () => unsub();
+  }, []);
+
+  return <div></div>;
+};
+
+export { db, auth, FirebaseUpdater };
