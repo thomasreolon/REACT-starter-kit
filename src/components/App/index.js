@@ -3,14 +3,17 @@ import contexts from "../../scripts/contexts";
 import { auth } from "../../scripts/firebase";
 
 import Navbar from "../Navbar";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 // App Component
 function App() {
   return (
-    <div>
+    <React.Fragment>
+      <CssBaseline />
+
       <FirebaseAuthUpdater />
       <Navbar />
-    </div>
+    </React.Fragment>
   );
 }
 
