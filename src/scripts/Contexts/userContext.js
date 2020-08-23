@@ -1,16 +1,16 @@
 import React, { createContext, useReducer, useContext } from "react";
 
-const initialState = null;
+const initialState = {
+  userType: null,
+  user: null,
+};
 
 /////////////////////////// REDUCER ////////////////////////////////////
 
 function reducer(state, action) {
   switch (action.type) {
     case "SET_USER":
-      return {
-        ...state,
-        user: action.user,
-      };
+      return { ...state, user: action.user };
 
     default:
       return state;
